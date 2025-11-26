@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quotex Community</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   
   <style>
-    /* ========== GLOBAL STYLES ========== */
     body {
       font-family: 'Cairo', sans-serif;
       background-color: #000000;
@@ -34,14 +33,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    .glow-red {
-      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
-    }
-    .glow-green {
-      box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
-    }
-    
-    /* ========== LANDING PAGE ========== */
     .landing-page {
       min-height: 100vh;
       display: flex;
@@ -93,7 +84,6 @@
       background: linear-gradient(to top, #000000 0%, #111827 50%, transparent 100%);
     }
     
-    /* ========== DASHBOARD ========== */
     .dashboard {
       display: none;
       flex-direction: column;
@@ -123,7 +113,7 @@
     .content-height {
       flex: 1;
       overflow-y: auto;
-      padding-bottom: 1rem;
+      padding-bottom: 5rem;
     }
     
     .bottom-nav {
@@ -176,7 +166,6 @@
       border: 1px solid #000000;
     }
     
-    /* ========== TABS ========== */
     .tab-content {
       display: none;
       padding: 1rem;
@@ -185,7 +174,6 @@
       display: block;
     }
     
-    /* ========== POSTS ========== */
     .post-card {
       background: #111827;
       border-radius: 0.75rem;
@@ -209,44 +197,63 @@
       color: #ffffff;
     }
     
-    /* ========== TRADING SIGNALS ========== */
+    /* تصغير حجم بطاقة الصفقة */
     .signal-card {
       position: relative;
-      border-radius: 1.5rem;
-      padding: 1.5rem;
+      border-radius: 1rem;
+      padding: 1rem;
       border: 2px solid;
       transition: all 0.5s;
       overflow: hidden;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
     .signal-card.sell {
       background: linear-gradient(135deg, rgba(127, 29, 29, 0.4) 0%, #000000 50%, #000000 100%);
       border-color: rgba(239, 68, 68, 0.5);
-      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
     }
     .signal-card.buy {
       background: linear-gradient(135deg, rgba(20, 83, 45, 0.4) 0%, #000000 50%, #000000 100%);
       border-color: rgba(34, 197, 94, 0.5);
-      box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
     }
     
     .arrow-icon.down {
       color: #ef4444;
       animation: bounceDown 1s infinite;
-      filter: drop-shadow(0 0 25px rgba(239, 68, 68, 0.9));
+      filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.7));
     }
     .arrow-icon.up {
       color: #22c55e;
       animation: bounceUp 1s infinite;
-      filter: drop-shadow(0 0 25px rgba(34, 197, 94, 0.9));
+      filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.7));
     }
     @keyframes bounceDown {
-      0%, 100% { transform: translateY(0.5rem); }
+      0%, 100% { transform: translateY(0.3rem); }
       50% { transform: translateY(0); }
     }
     @keyframes bounceUp {
-      0%, 100% { transform: translateY(-0.5rem); }
+      0%, 100% { transform: translateY(-0.3rem); }
       50% { transform: translateY(0); }
+    }
+    
+    /* بطاقة النتيجة الخضراء */
+    .result-card {
+      background: linear-gradient(135deg, rgba(20, 83, 45, 0.8) 0%, rgba(34, 197, 94, 0.2) 50%, #000000 100%);
+      border: 2px solid rgba(34, 197, 94, 0.7);
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+      display: none;
+    }
+    .result-card.show {
+      display: block;
+      animation: resultFadeIn 0.5s ease-out;
+    }
+    @keyframes resultFadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
     
     .history-card {
@@ -265,7 +272,6 @@
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
     }
     
-    /* ========== STRATEGIES ========== */
     .strategy-card {
       background: #111827;
       border-radius: 1rem;
@@ -291,7 +297,6 @@
       transform: scale(1.1);
     }
     
-    /* ========== SUB TABS ========== */
     .sub-tabs-container {
       background: #000000;
       border: 1px solid #374151;
@@ -319,6 +324,41 @@
     }
     .sub-tab:not(.active):hover {
       color: #d1d5db;
+    }
+
+    .comment-popup {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #111827;
+      border-top: 1px solid #374151;
+      border-top-left-radius: 1.5rem;
+      border-top-right-radius: 1.5rem;
+      padding: 1.5rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-out;
+      z-index: 60;
+      max-height: 70vh;
+    }
+    .comment-popup.active {
+      transform: translateY(0);
+    }
+    .comment-input {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 2rem;
+      padding: 0.75rem 1rem;
+      color: white;
+      width: 100%;
+      outline: none;
+    }
+    .comment-item {
+      background: #1f2937;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid #374151;
     }
   </style>
 </head>
@@ -383,13 +423,11 @@
   <!-- Header -->
   <header class="dashboard-header">
     <h1 class="font-black text-xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">QUOTEX VIP</h1>
-    <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700 hover:border-blue-500 transition-colors cursor-pointer">
-      <i class="fas fa-user text-gray-400"></i>
-    </div>
+    <div></div>
   </header>
   
   <!-- Content Area -->
-  <main class="content-height">
+  <main class="content-height no-scrollbar">
     
     <!-- Home Tab -->
     <div id="homeTab" class="tab-content active pb-4 pt-4 px-4">
@@ -422,9 +460,9 @@
               <i class="far fa-heart text-2xl"></i>
               <span id="likes-post1">124</span>
             </button>
-            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
+            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors" onclick="toggleComments('post1')">
               <i class="far fa-comment text-2xl"></i>
-              <span>45</span>
+              <span id="comments-post1">45</span>
             </button>
             <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
               <i class="fas fa-share text-2xl"></i>
@@ -458,9 +496,9 @@
               <i class="fas fa-heart text-2xl"></i>
               <span id="likes-post2">89</span>
             </button>
-            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
+            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors" onclick="toggleComments('post2')">
               <i class="far fa-comment text-2xl"></i>
-              <span>12</span>
+              <span id="comments-post2">12</span>
             </button>
             <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
               <i class="fas fa-share text-2xl"></i>
@@ -479,34 +517,101 @@
       
       <!-- Active Signals -->
       <div id="activeSignals">
-        <div class="signal-card sell">
-          <div class="flex justify-between items-start mb-8">
+        <!-- EUR/USD Signal (SMALLER) -->
+        <div id="eurSignal" class="signal-card sell">
+          <div class="flex justify-between items-start mb-4">
             <div>
-              <h3 class="text-3xl font-black text-white tracking-wider font-mono">EUR/USD</h3>
-              <div class="flex items-center gap-2 mt-2">
-                <i class="fas fa-clock text-gray-400 text-sm mr-1"></i>
-                <span class="text-gray-300 font-bold text-sm">5M دقيقة</span>
+              <h3 class="text-xl font-black text-white tracking-wider font-mono">EUR/USD</h3>
+              <div class="flex items-center gap-2 mt-1">
+                <i class="fas fa-clock text-gray-400 text-xs"></i>
+                <span class="text-gray-300 font-bold text-xs">5M دقيقة</span>
               </div>
             </div>
-            <div class="bg-red-600 text-white px-4 py-1.5 rounded-lg font-bold text-sm shadow-lg">هبوط PUT</div>
+            <div class="bg-red-600 text-white px-3 py-1 rounded-lg font-bold text-xs shadow-lg">هبوط PUT</div>
           </div>
-          <div class="flex justify-center items-center py-6 mb-6">
-            <i class="fas fa-arrow-down text-6xl arrow-icon down"></i>
+          <div class="flex justify-center items-center py-3 mb-4">
+            <i class="fas fa-arrow-down text-4xl arrow-icon down"></i>
             <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
-              <svg class="w-40 h-40 transform -rotate-90" viewBox="0 0 160 160">
-                <circle cx="80" cy="80" r="70" stroke="#374151" stroke-width="6" fill="transparent"></circle>
-                <circle cx="80" cy="80" r="70" stroke="#ef4444" stroke-width="6" fill="transparent" stroke-dasharray="440" stroke-dashoffset="0"></circle>
+              <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 160 160">
+                <circle cx="80" cy="80" r="70" stroke="#374151" stroke-width="4" fill="transparent"></circle>
+                <circle cx="80" cy="80" r="70" stroke="#ef4444" stroke-width="4" fill="transparent" stroke-dasharray="440" stroke-dashoffset="0"></circle>
               </svg>
             </div>
           </div>
-          <div class="grid grid-cols-2 gap-4 mt-4 bg-black/60 backdrop-blur-sm p-4 rounded-2xl border border-gray-800">
+          <div class="grid grid-cols-2 gap-3 mt-2 bg-black/60 backdrop-blur-sm p-3 rounded-xl border border-gray-800">
             <div class="text-center border-l border-gray-800">
               <p class="text-gray-500 text-xs mb-1 font-bold">سعر الدخول</p>
-              <p class="font-mono font-bold text-xl text-white">1.08450</p>
+              <p class="font-mono font-bold text-base text-white">1.08450</p>
             </div>
             <div class="text-center">
               <p class="text-gray-500 text-xs mb-1 font-bold">الوقت المتبقي</p>
-              <p class="font-mono font-bold text-xl text-yellow-500">240s</p>
+              <p id="eurTimer" class="font-mono font-bold text-base text-yellow-500">240s</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- USD/JPY Signal (SMALLER) -->
+        <div id="usdjpySignal" class="signal-card buy">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <h3 class="text-xl font-black text-white tracking-wider font-mono">USD/JPY</h3>
+              <div class="flex items-center gap-2 mt-1">
+                <i class="fas fa-clock text-gray-400 text-xs"></i>
+                <span class="text-gray-300 font-bold text-xs">1M دقيقة</span>
+              </div>
+            </div>
+            <div class="bg-green-600 text-white px-3 py-1 rounded-lg font-bold text-xs shadow-lg">صعود CALL</div>
+          </div>
+          <div class="flex justify-center items-center py-3 mb-4">
+            <i class="fas fa-arrow-up text-4xl arrow-icon up"></i>
+            <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+              <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 160 160">
+                <circle cx="80" cy="80" r="70" stroke="#374151" stroke-width="4" fill="transparent"></circle>
+                <circle cx="80" cy="80" r="70" stroke="#22c55e" stroke-width="4" fill="transparent" stroke-dasharray="440" stroke-dashoffset="0"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3 mt-2 bg-black/60 backdrop-blur-sm p-3 rounded-xl border border-gray-800">
+            <div class="text-center border-l border-gray-800">
+              <p class="text-gray-500 text-xs mb-1 font-bold">سعر الدخول</p>
+              <p class="font-mono font-bold text-base text-white">149.820</p>
+            </div>
+            <div class="text-center">
+              <p class="text-gray-500 text-xs mb-1 font-bold">الوقت المتبقي</p>
+              <p id="usdjpyTimer" class="font-mono font-bold text-base text-yellow-500">180s</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Cards (Hidden by default) -->
+        <div id="eurResult" class="result-card">
+          <div class="flex justify-between items-center">
+            <div>
+              <h4 class="text-lg font-bold text-white font-mono">EUR/USD</h4>
+              <p class="text-gray-400 text-xs">نتيجة الصفقة</p>
+            </div>
+            <div class="flex flex-col items-end">
+              <span class="font-black text-xl text-green-400">+ $245.00</span>
+              <span class="text-xs flex items-center gap-1 mt-1 font-bold text-green-600">
+                ربح ناجح
+                <i class="fas fa-check-circle text-xs"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div id="usdjpyResult" class="result-card">
+          <div class="flex justify-between items-center">
+            <div>
+              <h4 class="text-lg font-bold text-white font-mono">USD/JPY</h4>
+              <p class="text-gray-400 text-xs">نتيجة الصفقة</p>
+            </div>
+            <div class="flex flex-col items-end">
+              <span class="font-black text-xl text-green-400">+ $180.00</span>
+              <span class="text-xs flex items-center gap-1 mt-1 font-bold text-green-600">
+                ربح ناجح
+                <i class="fas fa-check-circle text-xs"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -649,23 +754,39 @@
   <nav class="bottom-nav">
     <div class="flex justify-between items-center max-w-md mx-auto">
       <button class="nav-item active" onclick="showTab('home')">
-        <i class="fas fa-home text-2xl"></i>
+        <i class="fas fa-home text-xl lg:text-2xl"></i>
         <span class="text-[10px] font-medium">الرئيسية</span>
       </button>
       <button class="nav-item relative" onclick="showTab('trading')">
         <div class="relative">
-          <i class="fas fa-chart-line text-2xl"></i>
+          <i class="fas fa-chart-line text-xl lg:text-2xl"></i>
           <span id="notificationBadge" class="notification-badge">2</span>
         </div>
         <span class="text-[10px] font-medium">التداول</span>
       </button>
       <button class="nav-item" onclick="showTab('strategies')">
-        <i class="fas fa-book-open text-2xl"></i>
+        <i class="fas fa-book-open text-xl lg:text-2xl"></i>
         <span class="text-[10px] font-medium">الاستراتيجيات</span>
       </button>
     </div>
-    <div class="h-4 w-full"></div>
   </nav>
+</div>
+
+<!-- نافذة التعليقات المنبثقة -->
+<div id="commentPopup" class="comment-popup no-scrollbar">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-bold text-white">التعليقات</h3>
+    <button onclick="closeComments()" class="text-gray-400 hover:text-white">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+  </div>
+  <div id="commentsList" class="mb-4 overflow-y-auto max-h-96 no-scrollbar"></div>
+  <div class="flex gap-2">
+    <input type="text" id="commentInput" class="comment-input" placeholder="اكتب تعليقك..." />
+    <button onclick="addComment()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-white">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
 </div>
 
 <script>
@@ -677,12 +798,30 @@
   let tradingSubTab = 'active';
   let strategiesSubTab = 'strategies';
   let unreadSignals = 2;
+  let currentPostId = null;
+  let comments = {
+    post1: [
+      { user: 'محمد علي', text: 'شكراً على التحليل المفيد!' },
+      { user: 'سارة أحمد', text: 'رائع, انتظر الإشارة القادمة' }
+    ],
+    post2: [
+      { user: 'خالد حسن', text: 'مبروك الربح!' }
+    ]
+  };
+  
+  // Trade completion state
+  let tradeCompleted = {
+    eurusd: false,
+    usdjpy: false
+  };
   
   // Elements
   const landingPage = document.getElementById('landingPage');
   const dashboard = document.getElementById('dashboard');
   const connectBtn = document.getElementById('connectBtn');
   const notificationBadge = document.getElementById('notificationBadge');
+  const commentPopup = document.getElementById('commentPopup');
+  const commentsList = document.getElementById('commentsList');
   
   // Show Dashboard
   connectBtn.addEventListener('click', () => {
@@ -695,21 +834,17 @@
   function showTab(tabName) {
     activeTab = tabName;
     
-    // Hide all tabs
     document.querySelectorAll('.tab-content').forEach(tab => {
       tab.classList.remove('active');
     });
     
-    // Show selected tab
     document.getElementById(tabName + 'Tab').classList.add('active');
     
-    // Update nav items
     document.querySelectorAll('.nav-item').forEach(item => {
       item.classList.remove('active');
     });
     event.currentTarget.classList.add('active');
     
-    // Hide notification badge if trading tab is active
     if (tabName === 'trading') {
       notificationBadge.style.display = 'none';
       unreadSignals = 0;
@@ -776,15 +911,77 @@
     likeCount.textContent = count;
   }
   
-  // Animate timer
+  // Toggle Comments
+  function toggleComments(postId) {
+    currentPostId = postId;
+    commentPopup.classList.add('active');
+    renderComments();
+  }
+  
+  // Close Comments
+  function closeComments() {
+    commentPopup.classList.remove('active');
+    currentPostId = null;
+  }
+  
+  // Render Comments
+  function renderComments() {
+    const postComments = comments[currentPostId] || [];
+    commentsList.innerHTML = postComments.map(comment => `
+      <div class="comment-item">
+        <h4 class="font-bold text-sm text-blue-400 mb-1">${comment.user}</h4>
+        <p class="text-gray-200 text-sm">${comment.text}</p>
+      </div>
+    `).join('');
+  }
+  
+  // Add Comment
+  function addComment() {
+    const input = document.getElementById('commentInput');
+    const text = input.value.trim();
+    
+    if (text && currentPostId) {
+      if (!comments[currentPostId]) {
+        comments[currentPostId] = [];
+      }
+      comments[currentPostId].push({ user: 'أنا', text: text });
+      input.value = '';
+      renderComments();
+      
+      const commentCount = document.getElementById('comments-' + currentPostId);
+      if (commentCount) {
+        commentCount.textContent = comments[currentPostId].length;
+      }
+    }
+  }
+  
+  // Animate timer and show result cards
   setInterval(() => {
-    const timerElement = document.querySelector('.signal-card .font-mono.text-yellow-500');
-    if (timerElement) {
-      const currentSeconds = parseInt(timerElement.textContent);
+    // EUR/USD Timer
+    const eurTimerElement = document.getElementById('eurTimer');
+    if (eurTimerElement && !tradeCompleted.eurusd) {
+      const currentSeconds = parseInt(eurTimerElement.textContent);
       if (currentSeconds > 0) {
-        timerElement.textContent = (currentSeconds - 1) + 's';
+        eurTimerElement.textContent = (currentSeconds - 1) + 's';
       } else {
-        timerElement.textContent = '300s';
+        // Trade completed - hide signal and show result
+        document.getElementById('eurSignal').style.display = 'none';
+        document.getElementById('eurResult').classList.add('show');
+        tradeCompleted.eurusd = true;
+      }
+    }
+    
+    // USD/JPY Timer
+    const usdjpyTimerElement = document.getElementById('usdjpyTimer');
+    if (usdjpyTimerElement && !tradeCompleted.usdjpy) {
+      const currentSeconds = parseInt(usdjpyTimerElement.textContent);
+      if (currentSeconds > 0) {
+        usdjpyTimerElement.textContent = (currentSeconds - 1) + 's';
+      } else {
+        // Trade completed - hide signal and show result
+        document.getElementById('usdjpySignal').style.display = 'none';
+        document.getElementById('usdjpyResult').classList.add('show');
+        tradeCompleted.usdjpy = true;
       }
     }
   }, 1000);
