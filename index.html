@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quotex Community</title>
-  
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  
   <style>
     body {
-      font-family: 'Cairo', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: #000000;
       color: #ffffff;
       overscroll-behavior-y: none;
-      overflow-y: auto; /* تفعيل التمرير العمودي */
+      overflow-y: auto;
     }
-    
     .page-transition {
       animation: pageFadeIn 0.5s ease-out;
     }
@@ -25,7 +22,6 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
     .landing-page {
       min-height: 100vh;
       display: flex;
@@ -34,7 +30,6 @@
       position: relative;
       overflow: hidden;
     }
-    
     .landing-bg {
       position: absolute;
       top: 0;
@@ -46,7 +41,6 @@
       z-index: 0;
       pointer-events: none;
     }
-    
     .main-content {
       flex: 1;
       display: flex;
@@ -58,7 +52,6 @@
       text-align: center;
       margin-top: 2.5rem;
     }
-    
     .connect-btn {
       width: 100%;
       background: #2563eb;
@@ -70,13 +63,11 @@
     .connect-btn:active {
       transform: scale(0.95);
     }
-    
     .social-footer {
       width: 100%;
       padding: 1.5rem 1rem;
       background: linear-gradient(to top, #000000 0%, #111827 50%, transparent 100%);
     }
-    
     .dashboard {
       display: none;
       flex-direction: column;
@@ -84,12 +75,11 @@
       background: #000000;
       color: white;
       position: relative;
-      overflow-y: auto; /* تفعيل التمرير في اللوحة */
+      overflow-y: auto;
     }
     .dashboard.active {
       display: flex;
     }
-    
     .dashboard-header {
       position: sticky;
       top: 0;
@@ -103,14 +93,12 @@
       justify-content: space-between;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
-    
     .content-height {
       flex: 1;
-      overflow-y: auto; /* السماح بالتمرير داخل المحتوى */
+      overflow-y: auto;
       padding-bottom: 5rem;
-      max-height: calc(100vh - 140px); /* حساب ارتفاع متاح للتمرير */
+      max-height: calc(100vh - 140px);
     }
-    
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -123,7 +111,6 @@
       z-index: 50;
       box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
     }
-    
     .nav-item {
       display: flex;
       flex-direction: column;
@@ -142,7 +129,6 @@
     .nav-item:not(.active):hover {
       color: #9ca3af;
     }
-    
     .notification-badge {
       position: absolute;
       top: -0.5rem;
@@ -160,16 +146,14 @@
       animation: pulse 2s infinite;
       border: 1px solid #000000;
     }
-    
     .tab-content {
       display: none;
       padding: 1rem;
-      min-height: 100%; /* ضمان أن المحتوى يملأ المساحة */
+      min-height: 100%;
     }
     .tab-content.active {
       display: block;
     }
-    
     .post-card {
       background: #111827;
       border-radius: 0.75rem;
@@ -179,7 +163,6 @@
       transition: box-shadow 0.3s;
       margin-bottom: 1rem;
     }
-    
     .like-btn.liked {
       color: #ef4444;
     }
@@ -189,8 +172,6 @@
     .like-btn:not(.liked):hover {
       color: #ffffff;
     }
-    
-    /* بطاقة الصفقة المصغّرة */
     .signal-card {
       position: relative;
       border-radius: 0.75rem;
@@ -210,7 +191,6 @@
       border-color: rgba(34, 197, 94, 0.4);
       box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
     }
-    
     .arrow-icon.down {
       color: #ef4444;
       animation: bounceDown 1s infinite;
@@ -229,8 +209,6 @@
       0%, 100% { transform: translateY(-0.2rem); }
       50% { transform: translateY(0); }
     }
-    
-    /* SVG Animation Circle - Smaller and centered */
     .signal-circle {
       position: absolute;
       top: 50%;
@@ -241,8 +219,6 @@
       opacity: 0.25;
       pointer-events: none;
     }
-    
-    /* بطاقة النتيجة الخضراء */
     .result-card {
       background: linear-gradient(135deg, rgba(20, 83, 45, 0.6) 0%, rgba(34, 197, 94, 0.15) 50%, #000000 100%);
       border: 1px solid rgba(34, 197, 94, 0.5);
@@ -260,7 +236,6 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
     .history-card {
       background: linear-gradient(to left, rgba(30, 58, 138, 0.2) 0%, #111827 50%, #111827 100%);
       border: 1px solid rgba(59, 130, 246, 0.3);
@@ -273,28 +248,6 @@
       transition: box-shadow 0.3s;
       margin-bottom: 1rem;
     }
-    
-    .strategy-card {
-      background: #111827;
-      border-radius: 1rem;
-      overflow: hidden;
-      border: 1px solid #374151;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s;
-      margin-bottom: 1.5rem;
-    }
-    
-    .strategy-img {
-      width: 100%;
-      height: 10rem;
-      object-fit: cover;
-      opacity: 0.5;
-      transition: transform 0.5s;
-    }
-    .strategy-card:hover .strategy-img {
-      transform: scale(1.1);
-    }
-    
     .sub-tabs-container {
       background: #000000;
       border: 1px solid #374151;
@@ -323,7 +276,6 @@
     .sub-tab:not(.active):hover {
       color: #d1d5db;
     }
-
     .comment-popup {
       position: fixed;
       bottom: 0;
@@ -358,21 +310,54 @@
       margin-bottom: 0.5rem;
       border: 1px solid #374151;
     }
+    .chart-container {
+      background: #111827;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border: 1px solid #374151;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .chart-bar {
+      height: 12px;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+    .chart-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+    .profit-bar {
+      background: linear-gradient(to right, #10b981, #22c55e);
+      width: 78%;
+    }
+    .loss-bar {
+      background: linear-gradient(to right, #ef4444, #f87171);
+      width: 22%;
+    }
+    .chart-value {
+      position: absolute;
+      right: -3.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: bold;
+      font-size: 0.875rem;
+    }
   </style>
 </head>
-<body class="bg-black text-white"> <!-- إزالة overflow-hidden -->
-  
+<body class="bg-black text-white">
 <!-- ========== LANDING PAGE ========== -->
 <div id="landingPage" class="landing-page page-transition">
   <div class="landing-bg"></div>
-  
   <div class="main-content">
     <div class="mb-10">
       <h1 class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-emerald-400 mb-6 drop-shadow-lg">QUOTEX VIP</h1>
-      <h2 class="text-2xl font-bold text-white mb-3">انضم إلينا مجاناً</h2>
-      <p class="text-gray-400 text-lg leading-relaxed max-w-xs mx-auto">من أقوى الصفقات على منصة كيوتكس</p>
+      <h2 class="text-2xl font-bold text-white mb-3">Join us for free</h2>
+      <p class="text-gray-400 text-lg leading-relaxed max-w-xs mx-auto">Top trading signals on Quotex platform</p>
     </div>
-    
     <div class="w-full max-w-sm mb-8">
       <button id="connectBtn" class="connect-btn group w-full text-white font-bold py-4 px-6 rounded-2xl shadow-[0_0_30px_rgba(37,99,235,0.4)] flex items-center justify-between border border-blue-500/50">
         <div class="flex items-center gap-4">
@@ -380,7 +365,7 @@
             <i class="fas fa-paper-plane text-white text-xl"></i>
           </div>
           <div class="flex flex-col items-start">
-            <span class="text-xs text-blue-200 font-medium">متابعة بتلجرام</span>
+            <span class="text-xs text-blue-200 font-medium">Follow on Telegram</span>
             <span class="text-xl font-bold tracking-wide">@TraderUser123</span>
           </div>
         </div>
@@ -393,11 +378,10 @@
       </button>
     </div>
   </div>
-  
   <div class="social-footer">
     <div class="flex flex-col items-center gap-5">
       <div class="flex items-center gap-2">
-        <span class="text-gray-400 text-sm font-bold tracking-wider">تابعنا على</span>
+        <span class="text-gray-400 text-sm font-bold tracking-wider">Follow us on</span>
       </div>
       <div class="flex gap-6 mb-2">
         <button class="group p-3.5 bg-gray-900 rounded-2xl border border-gray-800 hover:border-pink-600 hover:bg-pink-900/20 transition-all duration-300 text-gray-400 hover:text-pink-500 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)]">
@@ -410,30 +394,48 @@
           <i class="fab fa-tiktok text-2xl"></i>
         </button>
       </div>
-      <div class="text-[10px] text-gray-700 font-mono">© 2024 جميع الحقوق محفوظة</div>
+      <div class="text-[10px] text-gray-700 font-mono">© 2025 All rights reserved</div>
     </div>
   </div>
 </div>
-
 <!-- ========== DASHBOARD ========== -->
 <div id="dashboard" class="dashboard">
-  
   <!-- Header -->
   <header class="dashboard-header">
     <h1 class="font-black text-xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">QUOTEX VIP</h1>
     <div></div>
   </header>
-  
   <!-- Content Area -->
-  <main class="content-height"> <!-- إزالة no-scrollbar -->
-    
+  <main class="content-height">
     <!-- Home Tab -->
     <div id="homeTab" class="tab-content active pb-4 pt-4 px-4">
+      <!-- Chart Section -->
+      <div class="chart-container">
+        <h3 class="font-bold text-white mb-4 text-center">Trading Performance</h3>
+        <div class="chart-label">
+          <span class="text-green-400 font-medium">Profit Trades</span>
+          <span class="text-green-400 font-bold">78%</span>
+        </div>
+        <div class="chart-bar">
+          <div class="profit-bar relative">
+            <span class="chart-value text-green-400">78%</span>
+          </div>
+        </div>
+        <div class="chart-label mt-4">
+          <span class="text-red-400 font-medium">Loss Trades</span>
+          <span class="text-red-400 font-bold">22%</span>
+        </div>
+        <div class="chart-bar">
+          <div class="loss-bar relative">
+            <span class="chart-value text-red-400">22%</span>
+          </div>
+        </div>
+      </div>
+
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-white">المنشورات</h2>
+        <h2 class="text-xl font-bold text-white">Posts</h2>
         <span class="bg-blue-600/20 text-blue-400 text-xs px-2 py-1 rounded-full">Admin Only</span>
       </div>
-      
       <!-- Post 1 -->
       <div class="post-card">
         <div class="p-4">
@@ -445,14 +447,11 @@
                   <h3 class="font-bold text-white text-sm">Admin Trader</h3>
                   <i class="fas fa-check-circle text-blue-500 text-xs ml-1"></i>
                 </div>
-                <p class="text-gray-500 text-xs">منذ ساعتين</p>
+                <p class="text-gray-500 text-xs">2 hours ago</p>
               </div>
             </div>
-            <button class="text-gray-500 hover:text-white transition-colors">
-              <i class="fas fa-ellipsis-v"></i>
-            </button>
           </div>
-          <p class="text-gray-200 text-sm mb-3 leading-relaxed">تحليل السوق اليوم يشير إلى اتجاه صعودي قوي لزوج اليورو دولار. انتظروا الإشارة القادمة! 🔥</p>
+          <p class="text-gray-200 text-sm mb-3 leading-relaxed">Today's market analysis shows a strong bullish trend for EUR/USD. Wait for the next signal! 🔥</p>
           <div class="flex items-center justify-between pt-3 border-t border-gray-800">
             <button class="like-btn flex items-center gap-1.5 text-sm transition-colors" onclick="toggleLike('post1')">
               <i class="far fa-heart text-2xl"></i>
@@ -462,13 +461,9 @@
               <i class="far fa-comment text-2xl"></i>
               <span id="comments-post1">45</span>
             </button>
-            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
-              <i class="fas fa-share text-2xl"></i>
-            </button>
           </div>
         </div>
       </div>
-      
       <!-- Post 2 -->
       <div class="post-card">
         <div class="p-4">
@@ -480,14 +475,11 @@
                   <h3 class="font-bold text-white text-sm">Admin Trader</h3>
                   <i class="fas fa-check-circle text-blue-500 text-xs ml-1"></i>
                 </div>
-                <p class="text-gray-500 text-xs">منذ 5 ساعات</p>
+                <p class="text-gray-500 text-xs">5 hours ago</p>
               </div>
             </div>
-            <button class="text-gray-500 hover:text-white transition-colors">
-              <i class="fas fa-ellipsis-v"></i>
-            </button>
           </div>
-          <p class="text-gray-200 text-sm mb-3 leading-relaxed">نتائج جلسة التداول الصباحية: 5 ربح ✅ - 0 خسارة. استمروا في الالتزام بإدارة رأس المال.</p>
+          <p class="text-gray-200 text-sm mb-3 leading-relaxed">Morning trading session results: 5 wins ✅ - 0 losses. Keep following strict risk management.</p>
           <img src="https://picsum.photos/600/300" alt="Post content" class="w-full h-auto object-cover mb-3 rounded-lg">
           <div class="flex items-center justify-between pt-3 border-t border-gray-800">
             <button class="like-btn liked flex items-center gap-1.5 text-sm transition-colors" onclick="toggleLike('post2')">
@@ -498,14 +490,10 @@
               <i class="far fa-comment text-2xl"></i>
               <span id="comments-post2">12</span>
             </button>
-            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
-              <i class="fas fa-share text-2xl"></i>
-            </button>
           </div>
         </div>
       </div>
-      
-      <!-- Additional posts for testing scroll -->
+      <!-- Additional posts -->
       <div class="post-card">
         <div class="p-4">
           <div class="flex items-center justify-between mb-3">
@@ -516,14 +504,11 @@
                   <h3 class="font-bold text-white text-sm">Admin Trader</h3>
                   <i class="fas fa-check-circle text-blue-500 text-xs ml-1"></i>
                 </div>
-                <p class="text-gray-500 text-xs">منذ 8 ساعات</p>
+                <p class="text-gray-500 text-xs">8 hours ago</p>
               </div>
             </div>
-            <button class="text-gray-500 hover:text-white transition-colors">
-              <i class="fas fa-ellipsis-v"></i>
-            </button>
           </div>
-          <p class="text-gray-200 text-sm mb-3 leading-relaxed">نصائح مهمة لإدارة رأس المال: لا تخاطر بأكثر من 2% من رصيدك في صفقة واحدة.</p>
+          <p class="text-gray-200 text-sm mb-3 leading-relaxed">Important capital management tips: Never risk more than 2% of your balance on a single trade.</p>
           <div class="flex items-center justify-between pt-3 border-t border-gray-800">
             <button class="like-btn flex items-center gap-1.5 text-sm transition-colors" onclick="toggleLike('post3')">
               <i class="far fa-heart text-2xl"></i>
@@ -533,14 +518,9 @@
               <i class="far fa-comment text-2xl"></i>
               <span id="comments-post3">23</span>
             </button>
-            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
-              <i class="fas fa-share text-2xl"></i>
-            </button>
           </div>
         </div>
       </div>
-
-      <!-- More posts for scroll testing -->
       <div class="post-card">
         <div class="p-4">
           <div class="flex items-center justify-between mb-3">
@@ -551,14 +531,11 @@
                   <h3 class="font-bold text-white text-sm">Admin Trader</h3>
                   <i class="fas fa-check-circle text-blue-500 text-xs ml-1"></i>
                 </div>
-                <p class="text-gray-500 text-xs">منذ يوم</p>
+                <p class="text-gray-500 text-xs">1 day ago</p>
               </div>
             </div>
-            <button class="text-gray-500 hover:text-white transition-colors">
-              <i class="fas fa-ellipsis-v"></i>
-            </button>
           </div>
-          <p class="text-gray-200 text-sm mb-3 leading-relaxed">تحديثات السوق الأسبوعية: تركيز على الذهب والنفط هذا الأسبوع.</p>
+          <p class="text-gray-200 text-sm mb-3 leading-relaxed">Weekly market update: Focus on Gold and Oil this week.</p>
           <div class="flex items-center justify-between pt-3 border-t border-gray-800">
             <button class="like-btn flex items-center gap-1.5 text-sm transition-colors" onclick="toggleLike('post4')">
               <i class="far fa-heart text-2xl"></i>
@@ -568,34 +545,28 @@
               <i class="far fa-comment text-2xl"></i>
               <span id="comments-post4">7</span>
             </button>
-            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
-              <i class="fas fa-share text-2xl"></i>
-            </button>
           </div>
         </div>
       </div>
     </div>
-    
     <!-- Trading Tab -->
     <div id="tradingTab" class="tab-content pb-4 pt-4 px-4">
       <div class="sub-tabs-container flex">
-        <button id="activeTabBtn" class="sub-tab active" onclick="showTradingSubTab('active')">الصفقات النشطة</button>
-        <button id="resultsTabBtn" class="sub-tab" onclick="showTradingSubTab('results')">النتائج السابقة</button>
+        <button id="activeTabBtn" class="sub-tab active" onclick="showTradingSubTab('active')">Active Signals</button>
+        <button id="resultsTabBtn" class="sub-tab" onclick="showTradingSubTab('results')">Previous Results</button>
       </div>
-      
       <!-- Active Signals -->
       <div id="activeSignals">
-        <!-- EUR/USD Signal (FIRST - will hide after completion) -->
         <div id="eurSignal" class="signal-card sell">
           <div class="flex justify-between items-start mb-4">
             <div>
               <h3 class="text-lg font-black text-white tracking-wider font-mono">EUR/USD</h3>
               <div class="flex items-center gap-2 mt-1">
                 <i class="fas fa-clock text-gray-400 text-xs"></i>
-                <span class="text-gray-300 font-bold text-xs">5M دقيقة</span>
+                <span class="text-gray-300 font-bold text-xs">5M Minutes</span>
               </div>
             </div>
-            <div class="bg-red-600 text-white px-2 py-1 rounded font-bold text-xs shadow-lg">هبوط PUT</div>
+            <div class="bg-red-600 text-white px-2 py-1 rounded font-bold text-xs shadow-lg">PUT SELL</div>
           </div>
           <div class="flex justify-center items-center py-3 mb-3 relative">
             <i class="fas fa-arrow-down text-3xl arrow-icon down"></i>
@@ -606,27 +577,25 @@
           </div>
           <div class="grid grid-cols-2 gap-2 mt-2 bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-gray-800">
             <div class="text-center border-l border-gray-800">
-              <p class="text-gray-500 text-xs mb-1 font-bold">سعر الدخول</p>
+              <p class="text-gray-500 text-xs mb-1 font-bold">Entry Price</p>
               <p class="font-mono font-bold text-sm text-white">1.08450</p>
             </div>
             <div class="text-center">
-              <p class="text-gray-500 text-xs mb-1 font-bold">الوقت المتبقي</p>
+              <p class="text-gray-500 text-xs mb-1 font-bold">Time Left</p>
               <p id="eurTimer" class="font-mono font-bold text-sm text-yellow-500">60s</p>
             </div>
           </div>
         </div>
-
-        <!-- USD/JPY Signal (SECOND - hidden initially) -->
         <div id="usdjpySignal" class="signal-card buy" style="display: none;">
           <div class="flex justify-between items-start mb-4">
             <div>
               <h3 class="text-lg font-black text-white tracking-wider font-mono">USD/JPY</h3>
               <div class="flex items-center gap-2 mt-1">
                 <i class="fas fa-clock text-gray-400 text-xs"></i>
-                <span class="text-gray-300 font-bold text-xs">1M دقيقة</span>
+                <span class="text-gray-300 font-bold text-xs">1M Minute</span>
               </div>
             </div>
-            <div class="bg-green-600 text-white px-2 py-1 rounded font-bold text-xs shadow-lg">صعود CALL</div>
+            <div class="bg-green-600 text-white px-2 py-1 rounded font-bold text-xs shadow-lg">CALL BUY</div>
           </div>
           <div class="flex justify-center items-center py-3 mb-3 relative">
             <i class="fas fa-arrow-up text-3xl arrow-icon up"></i>
@@ -637,34 +606,31 @@
           </div>
           <div class="grid grid-cols-2 gap-2 mt-2 bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-gray-800">
             <div class="text-center border-l border-gray-800">
-              <p class="text-gray-500 text-xs mb-1 font-bold">سعر الدخول</p>
+              <p class="text-gray-500 text-xs mb-1 font-bold">Entry Price</p>
               <p class="font-mono font-bold text-sm text-white">149.820</p>
             </div>
             <div class="text-center">
-              <p class="text-gray-500 text-xs mb-1 font-bold">الوقت المتبقي</p>
+              <p class="text-gray-500 text-xs mb-1 font-bold">Time Left</p>
               <p id="usdjpyTimer" class="font-mono font-bold text-sm text-yellow-500">120s</p>
             </div>
           </div>
         </div>
-
-        <!-- Result Card (Hidden by default, shows after first trade) -->
         <div id="tradeResult" class="result-card">
           <div class="flex justify-between items-center">
             <div>
               <h4 class="text-base font-bold text-white font-mono">EUR/USD</h4>
-              <p class="text-gray-400 text-xs">نتيجة الصفقة</p>
+              <p class="text-gray-400 text-xs">Trade Result</p>
             </div>
             <div class="flex flex-col items-end">
               <span class="font-black text-lg text-green-400">+ $245.00</span>
               <span class="text-xs flex items-center gap-1 mt-1 font-bold text-green-600">
-                ربح ناجح
+                Profit Success
                 <i class="fas fa-check-circle text-xs"></i>
               </span>
             </div>
           </div>
         </div>
       </div>
-      
       <!-- History Signals -->
       <div id="historySignals" style="display: none;">
         <div class="history-card">
@@ -678,12 +644,11 @@
           <div class="flex flex-col items-end">
             <span class="font-black text-lg text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.3)]">+ $182.00</span>
             <span class="text-xs flex items-center gap-1 mt-1 font-bold text-green-600">
-              ربح
+              Profit
               <i class="fas fa-trend-up text-xs ml-1"></i>
             </span>
           </div>
         </div>
-        
         <div class="history-card">
           <div>
             <div class="flex items-center gap-3 mb-2">
@@ -695,270 +660,101 @@
           <div class="flex flex-col items-end">
             <span class="font-black text-lg text-red-400">- $100.00</span>
             <span class="text-xs flex items-center gap-1 mt-1 font-bold text-red-600">
-              خسارة
+              Loss
               <i class="fas fa-arrow-down text-xs ml-1"></i>
             </span>
           </div>
         </div>
       </div>
     </div>
-    
-    <!-- Strategies Tab -->
-    <div id="strategiesTab" class="tab-content pb-4 pt-4 px-4">
-      <div class="flex justify-center mb-8 border-b border-gray-800 pb-2">
-        <button class="px-6 py-2 text-sm font-medium text-white relative" onclick="showStrategiesSubTab('strategies')">
-          الاستراتيجيات
-          <span class="absolute bottom-[-9px] left-0 w-full h-0.5 bg-blue-500 rounded-full"></span>
-        </button>
-        <button class="px-6 py-2 text-sm font-medium text-gray-500 hover:text-gray-300 transition-colors" onclick="showStrategiesSubTab('bots')">
-          البوتات الآلية
-        </button>
-      </div>
-      
-      <div id="strategiesList">
-        <div class="strategy-card">
-          <div class="relative h-40 flex items-center justify-center overflow-hidden">
-            <img src="https://picsum.photos/seed/st1/600/300" alt="Strategy" class="strategy-img">
-            <div class="absolute z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full border border-white/20">
-              <i class="fas fa-play text-white text-2xl"></i>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-white mb-2">استراتيجية الدقيقة الواحدة - مؤشر RSI</h3>
-            <p class="text-gray-400 text-sm mb-4 leading-relaxed">شرح كامل لكيفية استغلال تشبعات الشراء والبيع في الفريمات الصغيرة.</p>
-            <div class="flex items-center justify-between border-t border-gray-800 pt-4">
-              <div class="flex gap-4">
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-thumbs-up text-xs mr-1"></i>
-                  <span>234</span>
-                </button>
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-comment text-xs mr-1"></i>
-                  <span>تعليق</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="strategy-card">
-          <div class="relative h-40 flex items-center justify-center overflow-hidden">
-            <img src="https://picsum.photos/seed/st2/600/300" alt="Strategy" class="strategy-img">
-            <div class="absolute z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full border border-white/20">
-              <i class="fas fa-play text-white text-2xl"></i>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-white mb-2">سر التداول مع الاتجاه (Trend Following)</h3>
-            <p class="text-gray-400 text-sm mb-4 leading-relaxed">كيف تحدد الاتجاه القوي وتدخل معه بصفقات مضمونة بنسبة 90%.</p>
-            <div class="flex items-center justify-between border-t border-gray-800 pt-4">
-              <div class="flex gap-4">
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-thumbs-up text-xs mr-1"></i>
-                  <span>189</span>
-                </button>
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-comment text-xs mr-1"></i>
-                  <span>تعليق</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Additional strategies for scroll testing -->
-        <div class="strategy-card">
-          <div class="relative h-40 flex items-center justify-center overflow-hidden">
-            <img src="https://picsum.photos/seed/st3/600/300" alt="Strategy" class="strategy-img">
-            <div class="absolute z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full border border-white/20">
-              <i class="fas fa-play text-white text-2xl"></i>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-white mb-2">استراتيجية التداول على الأخبار</h3>
-            <p class="text-gray-400 text-sm mb-4 leading-relaxed">كيفية استغلال الأخبار الاقتصادية لتحقيق أرباح سريعة.</p>
-            <div class="flex items-center justify-between border-t border-gray-800 pt-4">
-              <div class="flex gap-4">
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-thumbs-up text-xs mr-1"></i>
-                  <span>342</span>
-                </button>
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-comment text-xs mr-1"></i>
-                  <span>تعليق</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="strategy-card">
-          <div class="relative h-40 flex items-center justify-center overflow-hidden">
-            <img src="https://picsum.photos/seed/st4/600/300" alt="Strategy" class="strategy-img">
-            <div class="absolute z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full border border-white/20">
-              <i class="fas fa-play text-white text-2xl"></i>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-white mb-2">إدارة المخاطر المتقدمة</h3>
-            <p class="text-gray-400 text-sm mb-4 leading-relaxed">تقنيات احترافية لحماية رأس مالك وتقليل الخسائر.</p>
-            <div class="flex items-center justify-between border-t border-gray-800 pt-4">
-              <div class="flex gap-4">
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-thumbs-up text-xs mr-1"></i>
-                  <span>278</span>
-                </button>
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-comment text-xs mr-1"></i>
-                  <span>تعليق</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div id="botsList" style="display: none;">
-        <div class="strategy-card">
-          <div class="relative h-40 flex items-center justify-center overflow-hidden">
-            <img src="https://picsum.photos/seed/bt1/600/300" alt="Bot" class="strategy-img">
-            <div class="absolute z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full border border-white/20 group-hover:bg-blue-600/20 transition-colors">
-              <i class="fas fa-download text-white text-2xl"></i>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-white mb-2">Quotex Sniper Bot V2</h3>
-            <p class="text-gray-400 text-sm mb-4 leading-relaxed">بوت تلقائي يعطي إشارات دقيقة على زوج اليورو دولار.</p>
-            <div class="flex items-center justify-between border-t border-gray-800 pt-4">
-              <div class="flex gap-4">
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-thumbs-up text-xs mr-1"></i>
-                  <span>567</span>
-                </button>
-                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
-                  <i class="far fa-comment text-xs mr-1"></i>
-                  <span>تعليق</span>
-                </button>
-              </div>
-              <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg transition-colors">تحميل الآن</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
   </main>
-  
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
     <div class="flex justify-between items-center max-w-md mx-auto">
       <button class="nav-item active" onclick="showTab('home')">
         <i class="fas fa-home text-xl lg:text-2xl"></i>
-        <span class="text-[10px] font-medium">الرئيسية</span>
+        <span class="text-[10px] font-medium">Home</span>
       </button>
       <button class="nav-item relative" onclick="showTab('trading')">
         <div class="relative">
           <i class="fas fa-chart-line text-xl lg:text-2xl"></i>
           <span id="notificationBadge" class="notification-badge">2</span>
         </div>
-        <span class="text-[10px] font-medium">التداول</span>
-      </button>
-      <button class="nav-item" onclick="showTab('strategies')">
-        <i class="fas fa-book-open text-xl lg:text-2xl"></i>
-        <span class="text-[10px] font-medium">الاستراتيجيات</span>
+        <span class="text-[10px] font-medium">Trading</span>
       </button>
     </div>
   </nav>
 </div>
-
-<!-- نافذة التعليقات المنبثقة -->
+<!-- Comment Popup -->
 <div id="commentPopup" class="comment-popup">
   <div class="flex items-center justify-between mb-4">
-    <h3 class="text-lg font-bold text-white">التعليقات</h3>
+    <h3 class="text-lg font-bold text-white">Comments</h3>
     <button onclick="closeComments()" class="text-gray-400 hover:text-white">
       <i class="fas fa-times text-xl"></i>
     </button>
   </div>
   <div id="commentsList" class="mb-4 overflow-y-auto max-h-96"></div>
   <div class="flex gap-2">
-    <input type="text" id="commentInput" class="comment-input" placeholder="اكتب تعليقك..." />
+    <input type="text" id="commentInput" class="comment-input" placeholder="Write your comment..." />
     <button onclick="addComment()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-white">
       <i class="fas fa-paper-plane"></i>
     </button>
   </div>
 </div>
-
 <script>
-  // ========== JAVASCRIPT ==========
-  
-  // State
   let currentView = 'landing';
   let activeTab = 'home';
   let tradingSubTab = 'active';
-  let strategiesSubTab = 'strategies';
   let unreadSignals = 2;
   let currentPostId = null;
   let comments = {
     post1: [
-      { user: 'محمد علي', text: 'شكراً على التحليل المفيد!' },
-      { user: 'سارة أحمد', text: 'رائع, انتظر الإشارة القادمة' }
+      { user: 'Mohamed Ali', text: 'Thank you for the helpful analysis!' },
+      { user: 'Sara Ahmed', text: 'Awesome, waiting for the next signal!' }
     ],
     post2: [
-      { user: 'خالد حسن', text: 'مبروك الربح!' }
+      { user: 'Khaled Hassan', text: 'Congrats on the profit!' }
     ],
     post3: [],
     post4: []
   };
-  
-  // Trade state management
   let tradeState = {
     eurusd: { completed: false, shown: false },
     usdjpy: { completed: false, shown: false }
   };
-  
-  // Elements
   const landingPage = document.getElementById('landingPage');
   const dashboard = document.getElementById('dashboard');
   const connectBtn = document.getElementById('connectBtn');
   const notificationBadge = document.getElementById('notificationBadge');
   const commentPopup = document.getElementById('commentPopup');
   const commentsList = document.getElementById('commentsList');
-  
-  // Show Dashboard
+
   connectBtn.addEventListener('click', () => {
     currentView = 'dashboard';
     landingPage.style.display = 'none';
     dashboard.classList.add('active');
   });
-  
-  // Show Tab
+
   function showTab(tabName) {
     activeTab = tabName;
-    
     document.querySelectorAll('.tab-content').forEach(tab => {
       tab.classList.remove('active');
     });
-    
     document.getElementById(tabName + 'Tab').classList.add('active');
-    
     document.querySelectorAll('.nav-item').forEach(item => {
       item.classList.remove('active');
     });
     event.currentTarget.classList.add('active');
-    
     if (tabName === 'trading') {
       notificationBadge.style.display = 'none';
       unreadSignals = 0;
     }
   }
-  
-  // Show Trading Sub Tab
+
   function showTradingSubTab(subTab) {
     tradingSubTab = subTab;
-    
     const activeSignals = document.getElementById('activeSignals');
     const historySignals = document.getElementById('historySignals');
-    
     if (subTab === 'active') {
       activeSignals.style.display = 'block';
       historySignals.style.display = 'none';
@@ -973,30 +769,12 @@
       unreadSignals = 0;
     }
   }
-  
-  // Show Strategies Sub Tab
-  function showStrategiesSubTab(subTab) {
-    strategiesSubTab = subTab;
-    
-    const strategiesList = document.getElementById('strategiesList');
-    const botsList = document.getElementById('botsList');
-    
-    if (subTab === 'strategies') {
-      strategiesList.style.display = 'block';
-      botsList.style.display = 'none';
-    } else {
-      strategiesList.style.display = 'none';
-      botsList.style.display = 'block';
-    }
-  }
-  
-  // Toggle Like
+
   function toggleLike(postId) {
     const likeBtn = event.currentTarget;
     const likeIcon = likeBtn.querySelector('i');
     const likeCount = document.getElementById('likes-' + postId);
     let count = parseInt(likeCount.textContent);
-    
     if (likeBtn.classList.contains('liked')) {
       likeBtn.classList.remove('liked');
       likeIcon.classList.remove('fas');
@@ -1008,24 +786,20 @@
       likeIcon.classList.add('fas');
       count++;
     }
-    
     likeCount.textContent = count;
   }
-  
-  // Toggle Comments
+
   function toggleComments(postId) {
     currentPostId = postId;
     commentPopup.classList.add('active');
     renderComments();
   }
-  
-  // Close Comments
+
   function closeComments() {
     commentPopup.classList.remove('active');
     currentPostId = null;
   }
-  
-  // Render Comments
+
   function renderComments() {
     const postComments = comments[currentPostId] || [];
     commentsList.innerHTML = postComments.map(comment => `
@@ -1035,63 +809,53 @@
       </div>
     `).join('');
   }
-  
-  // Add Comment
+
   function addComment() {
     const input = document.getElementById('commentInput');
     const text = input.value.trim();
-    
     if (text && currentPostId) {
       if (!comments[currentPostId]) {
         comments[currentPostId] = [];
       }
-      comments[currentPostId].push({ user: 'أنا', text: text });
+      comments[currentPostId].push({ user: 'Me', text: text });
       input.value = '';
       renderComments();
-      
       const commentCount = document.getElementById('comments-' + currentPostId);
       if (commentCount) {
         commentCount.textContent = comments[currentPostId].length;
       }
     }
   }
-  
-  // Trade completion logic with sequential display
+
   setInterval(() => {
-    // EUR/USD Timer - First trade
     const eurTimerElement = document.getElementById('eurTimer');
     if (eurTimerElement && !tradeState.eurusd.completed) {
       const currentSeconds = parseInt(eurTimerElement.textContent);
       if (currentSeconds > 0) {
         eurTimerElement.textContent = (currentSeconds - 1) + 's';
       } else {
-        // First trade completed
         tradeState.eurusd.completed = true;
         document.getElementById('eurSignal').style.display = 'none';
         document.getElementById('tradeResult').classList.add('show');
-        
-        // Show second trade after 1 second
         setTimeout(() => {
           document.getElementById('usdjpySignal').style.display = 'block';
           document.getElementById('tradeResult').classList.remove('show');
         }, 1000);
       }
     }
-    
-    // USD/JPY Timer - Second trade (only starts after first completes)
+
     const usdjpyTimerElement = document.getElementById('usdjpyTimer');
     if (usdjpyTimerElement && tradeState.eurusd.completed && !tradeState.usdjpy.completed) {
       const currentSeconds = parseInt(usdjpyTimerElement.textContent);
       if (currentSeconds > 0) {
         usdjpyTimerElement.textContent = (currentSeconds - 1) + 's';
       } else {
-        // Second trade completed
         tradeState.usdjpy.completed = true;
         document.getElementById('usdjpySignal').style.display = 'none';
       }
     }
   }, 1000);
 </script>
-
 </body>
 </html>
+
