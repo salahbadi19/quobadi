@@ -15,14 +15,7 @@
       background-color: #000000;
       color: #ffffff;
       overscroll-behavior-y: none;
-    }
-    
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      overflow-y: auto; /* تفعيل التمرير العمودي */
     }
     
     .page-transition {
@@ -91,6 +84,7 @@
       background: #000000;
       color: white;
       position: relative;
+      overflow-y: auto; /* تفعيل التمرير في اللوحة */
     }
     .dashboard.active {
       display: flex;
@@ -112,8 +106,9 @@
     
     .content-height {
       flex: 1;
-      overflow-y: auto;
+      overflow-y: auto; /* السماح بالتمرير داخل المحتوى */
       padding-bottom: 5rem;
+      max-height: calc(100vh - 140px); /* حساب ارتفاع متاح للتمرير */
     }
     
     .bottom-nav {
@@ -169,6 +164,7 @@
     .tab-content {
       display: none;
       padding: 1rem;
+      min-height: 100%; /* ضمان أن المحتوى يملأ المساحة */
     }
     .tab-content.active {
       display: block;
@@ -183,9 +179,6 @@
       transition: box-shadow 0.3s;
       margin-bottom: 1rem;
     }
-    .post-card:hover {
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-    }
     
     .like-btn.liked {
       color: #ef4444;
@@ -197,54 +190,66 @@
       color: #ffffff;
     }
     
-    /* تصغير حجم بطاقة الصفقة */
+    /* بطاقة الصفقة المصغّرة */
     .signal-card {
       position: relative;
-      border-radius: 1rem;
-      padding: 1rem;
-      border: 2px solid;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid;
       transition: all 0.5s;
       overflow: hidden;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
     .signal-card.sell {
-      background: linear-gradient(135deg, rgba(127, 29, 29, 0.4) 0%, #000000 50%, #000000 100%);
-      border-color: rgba(239, 68, 68, 0.5);
-      box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+      background: linear-gradient(135deg, rgba(127, 29, 29, 0.3) 0%, #000000 50%, #000000 100%);
+      border-color: rgba(239, 68, 68, 0.4);
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
     }
     .signal-card.buy {
-      background: linear-gradient(135deg, rgba(20, 83, 45, 0.4) 0%, #000000 50%, #000000 100%);
-      border-color: rgba(34, 197, 94, 0.5);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+      background: linear-gradient(135deg, rgba(20, 83, 45, 0.3) 0%, #000000 50%, #000000 100%);
+      border-color: rgba(34, 197, 94, 0.4);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
     }
     
     .arrow-icon.down {
       color: #ef4444;
       animation: bounceDown 1s infinite;
-      filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.7));
+      filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.7));
     }
     .arrow-icon.up {
       color: #22c55e;
       animation: bounceUp 1s infinite;
-      filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.7));
+      filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.7));
     }
     @keyframes bounceDown {
-      0%, 100% { transform: translateY(0.3rem); }
+      0%, 100% { transform: translateY(0.2rem); }
       50% { transform: translateY(0); }
     }
     @keyframes bounceUp {
-      0%, 100% { transform: translateY(-0.3rem); }
+      0%, 100% { transform: translateY(-0.2rem); }
       50% { transform: translateY(0); }
+    }
+    
+    /* SVG Animation Circle - Smaller and centered */
+    .signal-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 5rem;
+      height: 5rem;
+      opacity: 0.25;
+      pointer-events: none;
     }
     
     /* بطاقة النتيجة الخضراء */
     .result-card {
-      background: linear-gradient(135deg, rgba(20, 83, 45, 0.8) 0%, rgba(34, 197, 94, 0.2) 50%, #000000 100%);
-      border: 2px solid rgba(34, 197, 94, 0.7);
-      border-radius: 1rem;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+      background: linear-gradient(135deg, rgba(20, 83, 45, 0.6) 0%, rgba(34, 197, 94, 0.15) 50%, #000000 100%);
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
       display: none;
     }
     .result-card.show {
@@ -252,8 +257,8 @@
       animation: resultFadeIn 0.5s ease-out;
     }
     @keyframes resultFadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     .history-card {
@@ -268,9 +273,6 @@
       transition: box-shadow 0.3s;
       margin-bottom: 1rem;
     }
-    .history-card:hover {
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-    }
     
     .strategy-card {
       background: #111827;
@@ -280,10 +282,6 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       transition: all 0.3s;
       margin-bottom: 1.5rem;
-    }
-    .strategy-card:hover {
-      border-color: rgba(37, 99, 235, 0.5);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
     }
     
     .strategy-img {
@@ -362,8 +360,8 @@
     }
   </style>
 </head>
-<body class="bg-black text-white overflow-hidden">
-
+<body class="bg-black text-white"> <!-- إزالة overflow-hidden -->
+  
 <!-- ========== LANDING PAGE ========== -->
 <div id="landingPage" class="landing-page page-transition">
   <div class="landing-bg"></div>
@@ -427,7 +425,7 @@
   </header>
   
   <!-- Content Area -->
-  <main class="content-height no-scrollbar">
+  <main class="content-height"> <!-- إزالة no-scrollbar -->
     
     <!-- Home Tab -->
     <div id="homeTab" class="tab-content active pb-4 pt-4 px-4">
@@ -506,6 +504,76 @@
           </div>
         </div>
       </div>
+      
+      <!-- Additional posts for testing scroll -->
+      <div class="post-card">
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">AD</div>
+              <div>
+                <div class="flex items-center gap-1">
+                  <h3 class="font-bold text-white text-sm">Admin Trader</h3>
+                  <i class="fas fa-check-circle text-blue-500 text-xs ml-1"></i>
+                </div>
+                <p class="text-gray-500 text-xs">منذ 8 ساعات</p>
+              </div>
+            </div>
+            <button class="text-gray-500 hover:text-white transition-colors">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+          </div>
+          <p class="text-gray-200 text-sm mb-3 leading-relaxed">نصائح مهمة لإدارة رأس المال: لا تخاطر بأكثر من 2% من رصيدك في صفقة واحدة.</p>
+          <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+            <button class="like-btn flex items-center gap-1.5 text-sm transition-colors" onclick="toggleLike('post3')">
+              <i class="far fa-heart text-2xl"></i>
+              <span id="likes-post3">156</span>
+            </button>
+            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors" onclick="toggleComments('post3')">
+              <i class="far fa-comment text-2xl"></i>
+              <span id="comments-post3">23</span>
+            </button>
+            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
+              <i class="fas fa-share text-2xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- More posts for scroll testing -->
+      <div class="post-card">
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">AD</div>
+              <div>
+                <div class="flex items-center gap-1">
+                  <h3 class="font-bold text-white text-sm">Admin Trader</h3>
+                  <i class="fas fa-check-circle text-blue-500 text-xs ml-1"></i>
+                </div>
+                <p class="text-gray-500 text-xs">منذ يوم</p>
+              </div>
+            </div>
+            <button class="text-gray-500 hover:text-white transition-colors">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+          </div>
+          <p class="text-gray-200 text-sm mb-3 leading-relaxed">تحديثات السوق الأسبوعية: تركيز على الذهب والنفط هذا الأسبوع.</p>
+          <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+            <button class="like-btn flex items-center gap-1.5 text-sm transition-colors" onclick="toggleLike('post4')">
+              <i class="far fa-heart text-2xl"></i>
+              <span id="likes-post4">89</span>
+            </button>
+            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors" onclick="toggleComments('post4')">
+              <i class="far fa-comment text-2xl"></i>
+              <span id="comments-post4">7</span>
+            </button>
+            <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
+              <i class="fas fa-share text-2xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     
     <!-- Trading Tab -->
@@ -517,97 +585,77 @@
       
       <!-- Active Signals -->
       <div id="activeSignals">
-        <!-- EUR/USD Signal (SMALLER) -->
+        <!-- EUR/USD Signal (FIRST - will hide after completion) -->
         <div id="eurSignal" class="signal-card sell">
           <div class="flex justify-between items-start mb-4">
             <div>
-              <h3 class="text-xl font-black text-white tracking-wider font-mono">EUR/USD</h3>
+              <h3 class="text-lg font-black text-white tracking-wider font-mono">EUR/USD</h3>
               <div class="flex items-center gap-2 mt-1">
                 <i class="fas fa-clock text-gray-400 text-xs"></i>
                 <span class="text-gray-300 font-bold text-xs">5M دقيقة</span>
               </div>
             </div>
-            <div class="bg-red-600 text-white px-3 py-1 rounded-lg font-bold text-xs shadow-lg">هبوط PUT</div>
+            <div class="bg-red-600 text-white px-2 py-1 rounded font-bold text-xs shadow-lg">هبوط PUT</div>
           </div>
-          <div class="flex justify-center items-center py-3 mb-4">
-            <i class="fas fa-arrow-down text-4xl arrow-icon down"></i>
-            <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
-              <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 160 160">
-                <circle cx="80" cy="80" r="70" stroke="#374151" stroke-width="4" fill="transparent"></circle>
-                <circle cx="80" cy="80" r="70" stroke="#ef4444" stroke-width="4" fill="transparent" stroke-dasharray="440" stroke-dashoffset="0"></circle>
-              </svg>
-            </div>
+          <div class="flex justify-center items-center py-3 mb-3 relative">
+            <i class="fas fa-arrow-down text-3xl arrow-icon down"></i>
+            <svg class="signal-circle" viewBox="0 0 160 160">
+              <circle cx="80" cy="80" r="60" stroke="#374151" stroke-width="3" fill="transparent"></circle>
+              <circle cx="80" cy="80" r="60" stroke="#ef4444" stroke-width="3" fill="transparent" stroke-dasharray="377" stroke-dashoffset="0"></circle>
+            </svg>
           </div>
-          <div class="grid grid-cols-2 gap-3 mt-2 bg-black/60 backdrop-blur-sm p-3 rounded-xl border border-gray-800">
+          <div class="grid grid-cols-2 gap-2 mt-2 bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-gray-800">
             <div class="text-center border-l border-gray-800">
               <p class="text-gray-500 text-xs mb-1 font-bold">سعر الدخول</p>
-              <p class="font-mono font-bold text-base text-white">1.08450</p>
+              <p class="font-mono font-bold text-sm text-white">1.08450</p>
             </div>
             <div class="text-center">
               <p class="text-gray-500 text-xs mb-1 font-bold">الوقت المتبقي</p>
-              <p id="eurTimer" class="font-mono font-bold text-base text-yellow-500">240s</p>
+              <p id="eurTimer" class="font-mono font-bold text-sm text-yellow-500">60s</p>
             </div>
           </div>
         </div>
 
-        <!-- USD/JPY Signal (SMALLER) -->
-        <div id="usdjpySignal" class="signal-card buy">
+        <!-- USD/JPY Signal (SECOND - hidden initially) -->
+        <div id="usdjpySignal" class="signal-card buy" style="display: none;">
           <div class="flex justify-between items-start mb-4">
             <div>
-              <h3 class="text-xl font-black text-white tracking-wider font-mono">USD/JPY</h3>
+              <h3 class="text-lg font-black text-white tracking-wider font-mono">USD/JPY</h3>
               <div class="flex items-center gap-2 mt-1">
                 <i class="fas fa-clock text-gray-400 text-xs"></i>
                 <span class="text-gray-300 font-bold text-xs">1M دقيقة</span>
               </div>
             </div>
-            <div class="bg-green-600 text-white px-3 py-1 rounded-lg font-bold text-xs shadow-lg">صعود CALL</div>
+            <div class="bg-green-600 text-white px-2 py-1 rounded font-bold text-xs shadow-lg">صعود CALL</div>
           </div>
-          <div class="flex justify-center items-center py-3 mb-4">
-            <i class="fas fa-arrow-up text-4xl arrow-icon up"></i>
-            <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
-              <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 160 160">
-                <circle cx="80" cy="80" r="70" stroke="#374151" stroke-width="4" fill="transparent"></circle>
-                <circle cx="80" cy="80" r="70" stroke="#22c55e" stroke-width="4" fill="transparent" stroke-dasharray="440" stroke-dashoffset="0"></circle>
-              </svg>
-            </div>
+          <div class="flex justify-center items-center py-3 mb-3 relative">
+            <i class="fas fa-arrow-up text-3xl arrow-icon up"></i>
+            <svg class="signal-circle" viewBox="0 0 160 160">
+              <circle cx="80" cy="80" r="60" stroke="#374151" stroke-width="3" fill="transparent"></circle>
+              <circle cx="80" cy="80" r="60" stroke="#22c55e" stroke-width="3" fill="transparent" stroke-dasharray="377" stroke-dashoffset="0"></circle>
+            </svg>
           </div>
-          <div class="grid grid-cols-2 gap-3 mt-2 bg-black/60 backdrop-blur-sm p-3 rounded-xl border border-gray-800">
+          <div class="grid grid-cols-2 gap-2 mt-2 bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-gray-800">
             <div class="text-center border-l border-gray-800">
               <p class="text-gray-500 text-xs mb-1 font-bold">سعر الدخول</p>
-              <p class="font-mono font-bold text-base text-white">149.820</p>
+              <p class="font-mono font-bold text-sm text-white">149.820</p>
             </div>
             <div class="text-center">
               <p class="text-gray-500 text-xs mb-1 font-bold">الوقت المتبقي</p>
-              <p id="usdjpyTimer" class="font-mono font-bold text-base text-yellow-500">180s</p>
+              <p id="usdjpyTimer" class="font-mono font-bold text-sm text-yellow-500">120s</p>
             </div>
           </div>
         </div>
 
-        <!-- Result Cards (Hidden by default) -->
-        <div id="eurResult" class="result-card">
+        <!-- Result Card (Hidden by default, shows after first trade) -->
+        <div id="tradeResult" class="result-card">
           <div class="flex justify-between items-center">
             <div>
-              <h4 class="text-lg font-bold text-white font-mono">EUR/USD</h4>
+              <h4 class="text-base font-bold text-white font-mono">EUR/USD</h4>
               <p class="text-gray-400 text-xs">نتيجة الصفقة</p>
             </div>
             <div class="flex flex-col items-end">
-              <span class="font-black text-xl text-green-400">+ $245.00</span>
-              <span class="text-xs flex items-center gap-1 mt-1 font-bold text-green-600">
-                ربح ناجح
-                <i class="fas fa-check-circle text-xs"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div id="usdjpyResult" class="result-card">
-          <div class="flex justify-between items-center">
-            <div>
-              <h4 class="text-lg font-bold text-white font-mono">USD/JPY</h4>
-              <p class="text-gray-400 text-xs">نتيجة الصفقة</p>
-            </div>
-            <div class="flex flex-col items-end">
-              <span class="font-black text-xl text-green-400">+ $180.00</span>
+              <span class="font-black text-lg text-green-400">+ $245.00</span>
               <span class="text-xs flex items-center gap-1 mt-1 font-bold text-green-600">
                 ربح ناجح
                 <i class="fas fa-check-circle text-xs"></i>
@@ -717,6 +765,57 @@
             </div>
           </div>
         </div>
+
+        <!-- Additional strategies for scroll testing -->
+        <div class="strategy-card">
+          <div class="relative h-40 flex items-center justify-center overflow-hidden">
+            <img src="https://picsum.photos/seed/st3/600/300" alt="Strategy" class="strategy-img">
+            <div class="absolute z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full border border-white/20">
+              <i class="fas fa-play text-white text-2xl"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-lg text-white mb-2">استراتيجية التداول على الأخبار</h3>
+            <p class="text-gray-400 text-sm mb-4 leading-relaxed">كيفية استغلال الأخبار الاقتصادية لتحقيق أرباح سريعة.</p>
+            <div class="flex items-center justify-between border-t border-gray-800 pt-4">
+              <div class="flex gap-4">
+                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
+                  <i class="far fa-thumbs-up text-xs mr-1"></i>
+                  <span>342</span>
+                </button>
+                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
+                  <i class="far fa-comment text-xs mr-1"></i>
+                  <span>تعليق</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="strategy-card">
+          <div class="relative h-40 flex items-center justify-center overflow-hidden">
+            <img src="https://picsum.photos/seed/st4/600/300" alt="Strategy" class="strategy-img">
+            <div class="absolute z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full border border-white/20">
+              <i class="fas fa-play text-white text-2xl"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-lg text-white mb-2">إدارة المخاطر المتقدمة</h3>
+            <p class="text-gray-400 text-sm mb-4 leading-relaxed">تقنيات احترافية لحماية رأس مالك وتقليل الخسائر.</p>
+            <div class="flex items-center justify-between border-t border-gray-800 pt-4">
+              <div class="flex gap-4">
+                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
+                  <i class="far fa-thumbs-up text-xs mr-1"></i>
+                  <span>278</span>
+                </button>
+                <button class="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 text-xs transition-colors">
+                  <i class="far fa-comment text-xs mr-1"></i>
+                  <span>تعليق</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
       <div id="botsList" style="display: none;">
@@ -773,14 +872,14 @@
 </div>
 
 <!-- نافذة التعليقات المنبثقة -->
-<div id="commentPopup" class="comment-popup no-scrollbar">
+<div id="commentPopup" class="comment-popup">
   <div class="flex items-center justify-between mb-4">
     <h3 class="text-lg font-bold text-white">التعليقات</h3>
     <button onclick="closeComments()" class="text-gray-400 hover:text-white">
       <i class="fas fa-times text-xl"></i>
     </button>
   </div>
-  <div id="commentsList" class="mb-4 overflow-y-auto max-h-96 no-scrollbar"></div>
+  <div id="commentsList" class="mb-4 overflow-y-auto max-h-96"></div>
   <div class="flex gap-2">
     <input type="text" id="commentInput" class="comment-input" placeholder="اكتب تعليقك..." />
     <button onclick="addComment()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-white">
@@ -806,13 +905,15 @@
     ],
     post2: [
       { user: 'خالد حسن', text: 'مبروك الربح!' }
-    ]
+    ],
+    post3: [],
+    post4: []
   };
   
-  // Trade completion state
-  let tradeCompleted = {
-    eurusd: false,
-    usdjpy: false
+  // Trade state management
+  let tradeState = {
+    eurusd: { completed: false, shown: false },
+    usdjpy: { completed: false, shown: false }
   };
   
   // Elements
@@ -955,33 +1056,38 @@
     }
   }
   
-  // Animate timer and show result cards
+  // Trade completion logic with sequential display
   setInterval(() => {
-    // EUR/USD Timer
+    // EUR/USD Timer - First trade
     const eurTimerElement = document.getElementById('eurTimer');
-    if (eurTimerElement && !tradeCompleted.eurusd) {
+    if (eurTimerElement && !tradeState.eurusd.completed) {
       const currentSeconds = parseInt(eurTimerElement.textContent);
       if (currentSeconds > 0) {
         eurTimerElement.textContent = (currentSeconds - 1) + 's';
       } else {
-        // Trade completed - hide signal and show result
+        // First trade completed
+        tradeState.eurusd.completed = true;
         document.getElementById('eurSignal').style.display = 'none';
-        document.getElementById('eurResult').classList.add('show');
-        tradeCompleted.eurusd = true;
+        document.getElementById('tradeResult').classList.add('show');
+        
+        // Show second trade after 1 second
+        setTimeout(() => {
+          document.getElementById('usdjpySignal').style.display = 'block';
+          document.getElementById('tradeResult').classList.remove('show');
+        }, 1000);
       }
     }
     
-    // USD/JPY Timer
+    // USD/JPY Timer - Second trade (only starts after first completes)
     const usdjpyTimerElement = document.getElementById('usdjpyTimer');
-    if (usdjpyTimerElement && !tradeCompleted.usdjpy) {
+    if (usdjpyTimerElement && tradeState.eurusd.completed && !tradeState.usdjpy.completed) {
       const currentSeconds = parseInt(usdjpyTimerElement.textContent);
       if (currentSeconds > 0) {
         usdjpyTimerElement.textContent = (currentSeconds - 1) + 's';
       } else {
-        // Trade completed - hide signal and show result
+        // Second trade completed
+        tradeState.usdjpy.completed = true;
         document.getElementById('usdjpySignal').style.display = 'none';
-        document.getElementById('usdjpyResult').classList.add('show');
-        tradeCompleted.usdjpy = true;
       }
     }
   }, 1000);
